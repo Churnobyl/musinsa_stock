@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}
+    메인페이지
+{% endblock %}
+
+{% block content %}
+    <div class="container timeline-container">
+        <div class="row">
+            <!-- 왼쪽 컬럼 -->
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ user.username }}</h5>
+                        <p class="card-text"> {{ user.email }}</p>
+                        부서:
+                        <p class="card-text" style="color: grey"> {{ user.department }}</p>
+
+                    </div>
+                </div>
+            </div>
+            <!-- 오른 쪽 컬럼-->
+            <div class="col-md-9">
+                <!-- 글을 작성 하는 곳 -->
+                <div class="row mb-2">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h5 class="mt-0">상품 별 재고 현황</h5>
+                                        <table class="table table-hover">
+                                            <thead class="table-dark">
+                                            <tr>
+                                                <th scope="col">No.</th>
+                                                <th scope="col">제품이름</th>
+                                                <th scope="col">카테고리</th>
+                                                <th scope="col">색상</th>
+                                                <th scope="col">사이즈</th>
+                                                <th scope="col">재고</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="table-group-divider">
+                                            {% for stuff in all_stuff %}
+                                                    <tr onclick="window.location='/erp/{{ stuff.goods }}';">
+                                                        <th scope="row">{{ stuff.goods }}</th>
+                                                        <td>{{ stuff.goods_name }}</td>
+                                                        <td>{{ stuff.goods_category }}</td>
+                                                        <td>{{ stuff.goods_color }}</td>
+                                                        <td>{{ stuff.goods_size }}</td>
+                                                        <td>{{ stuff.stock }}</td>
+                                                    </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+{% endblock %}
