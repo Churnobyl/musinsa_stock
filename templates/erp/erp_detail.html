@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% block title %}
+    무신사 재고관리 시스템 상세정보
+{% endblock %}
+
+{% block content %}
+    <div class="container timeline-container">
+        <div class="row">
+            <!-- 왼쪽 컬럼 -->
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ user.username }}</h5>
+                        <p class="card-text"> {{ user.email }}</p>
+                        부서:
+                        <p class="card-text" style="color: grey"> {{ user.department }}</p>
+
+                    </div>
+                </div>
+            </div>
+            <!-- 오른 쪽 컬럼-->
+            <div class="col-md-9">
+                <!-- 글을 작성 하는 곳 -->
+                <div class="row mb-1">
+                    <div class="col-md-16">
+                        <div class="card" style="">
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <div>
+                                            <h5 class="mt-0" style="float: left">{{ erp_detail.goods_name }} 재고 현황</h5>
+                                            <a href="/" class="btn btn-outline-warning btn-sm" style="float: right">메인으로</a>
+                                            <a href="/erp/stock/{{ erp_detail.goods }}" class="btn btn-outline-primary btn-sm" style="float: right; margin-right: 10px">재고 변경</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="card">
+                                    <div class="card-body" style="display: flex;">
+                                        <div style="border: gray solid 1px; width: min-content; height: min-content;">
+                                            <img src="{{ erp_detail.image }}" style="width: 16rem">
+                                        </div>
+
+                                        <div style="width: 39rem; display: block; margin-left: 10px">
+                                            <table class="table table-striped-columns">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">항목</th>
+                                                    <th scope="col">현재 정보</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody class="table-group-divider">
+                                                <tr>
+                                                    <th scope="col">제품코드</th>
+                                                    <th scope="col">{{ erp_detail.goods }}</th>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">등록직원</th>
+                                                    <td>{{ username }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">제품이름</th>
+                                                    <td>{{ erp_detail.goods_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">카테고리</th>
+                                                    <td>{{ erp_detail.goods_category }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">색상</th>
+                                                    <td>{{ erp_detail.goods_color }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">사이즈</th>
+                                                    <td>{{ erp_detail.goods_size }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">재고</th>
+                                                    <td><b>{{ erp_detail.inventory.stock }}</b></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <table class="table table-hover">
+                                            <thead class="table-dark">
+                                            <tr>
+                                                <th scope="col">작성시간</th>
+                                                <th scope="col">입고/출고</th>
+                                                <th scope="col">수량</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="table-group-divider">
+                                            {% for history in history_data %}
+                                                <tr>
+                                                    <td>{{ history.history_time }}</td>
+                                                    <td>{% if history.in_out == 'I' %}
+                                                        입고
+                                                        {% endif %}
+                                                        {% if history.in_out == 'O' %}
+                                                        출고
+                                                        {% endif %}
+                                                        {% if history.in_out == 'N' %}
+                                                        신규
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>{{ history.count }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+{% endblock %}

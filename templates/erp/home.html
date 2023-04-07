@@ -27,7 +27,10 @@
                             <div class="card-body">
                                 <div class="media">
                                     <div class="media-body">
-                                        <h5 class="mt-0">상품 별 재고 현황</h5>
+                                        <div>
+                                            <h5 class="mt-0" style="float: left">상품 별 재고 현황</h5>
+                                            <a href="/erp/new" class="btn btn-outline-primary btn-sm" style="float: right">신규</a>
+                                        </div>
                                         <table class="table table-hover">
                                             <thead class="table-dark">
                                             <tr>
@@ -41,14 +44,14 @@
                                             </thead>
                                             <tbody class="table-group-divider">
                                             {% for stuff in all_stuff %}
-                                                    <tr onclick="window.location='/erp/{{ stuff.goods }}';">
-                                                        <th scope="row">{{ stuff.goods }}</th>
-                                                        <td>{{ stuff.goods_name }}</td>
-                                                        <td>{{ stuff.goods_category }}</td>
-                                                        <td>{{ stuff.goods_color }}</td>
-                                                        <td>{{ stuff.goods_size }}</td>
-                                                        <td>{{ stuff.stock }}</td>
-                                                    </tr>
+                                                <tr onclick="window.location='/erp/{{ stuff.goods }}';">
+                                                    <th scope="row">{{ stuff.goods }}</th>
+                                                    <td>{{ stuff.goods_name }}</td>
+                                                    <td>{{ stuff.goods_category }}</td>
+                                                    <td>{{ stuff.goods_color }}</td>
+                                                    <td>{{ stuff.goods_size }}</td>
+                                                    <td>{{ stuff.inventory.stock }}</td>
+                                                </tr>
                                             {% endfor %}
                                             </tbody>
                                         </table>

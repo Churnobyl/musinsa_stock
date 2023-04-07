@@ -27,8 +27,11 @@ def signup(request):
                 return render(request, 'accounts/signup.html', {'error': "이름, 비밀번호는 필수입니다!"})
 
             exist_user = get_user_model().objects.filter(username=username)
+            exist_email = get_user_model().objects.filter(email=email)
             if exist_user:
                 return render(request, 'accounts/signup.html', {'error': "이미 있는 이름입니다."})
+            elif exist_email:
+                return render(request, 'accounts/signup.html', {'error': "이미 있는 이메일입니다."})
             else:
                 UserModel.objects.create_user(username=username, password=password, email=email, department=department)
                 return redirect('/sign-in')
