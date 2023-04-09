@@ -22,7 +22,7 @@ class Stuff(models.Model):
     )
 
     goods_size = models.CharField(choices=sizes, max_length=1)
-    created_at = models.DateTimeField(default=timezone.now())
+    created_at = models.DateTimeField(default=timezone.localtime())
     updated_at = models.DateTimeField(auto_now=True)
     image = models.CharField(max_length=256)
 
@@ -54,6 +54,6 @@ class Inventory(models.Model):
     class Meta:
         db_table = 'inventory'
 
-    inventory = models.OneToOneField(Stuff, on_delete=models.CASCADE)
+    inventory = models.ForeignKey(Stuff, on_delete=models.CASCADE)
     stock = models.IntegerField(default=0)
 
