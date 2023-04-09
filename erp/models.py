@@ -54,6 +54,6 @@ class Inventory(models.Model):
     class Meta:
         db_table = 'inventory'
 
-    inventory = models.ForeignKey(Stuff, on_delete=models.CASCADE)
+    inventory = models.OneToOneField(Stuff, on_delete=models.CASCADE)
     stock = models.IntegerField(default=0)
 
